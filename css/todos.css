@@ -46,6 +46,7 @@ body {
 
 #todoapp:before {
     content: '';
+    
     width: 2px;
     position: absolute;
     top: 45px;

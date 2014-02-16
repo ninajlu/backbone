@@ -20,9 +20,7 @@ $(function() {
       rank:   -1,
         money_raised:0,
         num_stands:0,
-        title: "Test",
-        created_by: Parse.User.current(),
-        ACL:     new Parse.ACL(Parse.User.current())
+        title: "Test"
     },
 
     // Ensure that each todo created has `content`.
@@ -150,8 +148,6 @@ $(function() {
 
       // Setup the query for the collection to look for todos from the current user
       this.todos.query = new Parse.Query(Post);
-      //this.todos.query.equalTo("user", Parse.User.current());
-        
       this.todos.bind('add',     this.addOne);
       this.todos.bind('all',     this.render);
 
@@ -204,8 +200,7 @@ $(function() {
         money_raised:0,
         num_stands:0,
         title: title,
-        created_by: Parse.User.current(),
-        ACL: new Parse.ACL(Parse.User.current())
+        created_by: Parse.User.current()
       }, {success:function(newOne){
         console.log("yay");
       }});
@@ -238,8 +233,7 @@ $(function() {
         money_raised:0,
         num_stands:0,
         title: "Test",
-        created_by: Parse.User.current(),
-        ACL: new Parse.ACL(Parse.User.current())
+        created_by: Parse.User.current()
       }, {success:function(newOne){
         console.log("yay");
       }});
