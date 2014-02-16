@@ -16,7 +16,7 @@ $(function() {
   var Post = Parse.Object.extend("Post", {
     // Default attributes for the todo.
     defaults: {
-      content: "empty todo...",
+      description: "empty todo...",
       rank:   -1,
         money_raised:0,
         num_stands:0,
@@ -25,11 +25,15 @@ $(function() {
 
     // Ensure that each todo created has `content`.
     initialize: function() {
-      if (!this.get("content")) {
-        this.set({"content": this.defaults.content});
+      if (!this.get("description")) {
+        this.set({"description": this.defaults.description});
       }
+      console.log(this.get("description"));
     },
-
+    setName: function(){
+      console.log(this);
+      //this.set({"author":this.get("created_by").get("username")});
+    },
     // Toggle the `done` state of this todo item.
     toggle: function() {
       this.save({done: !this.get("done")});
@@ -101,6 +105,8 @@ $(function() {
 
     // Re-render the contents of the todo item.
     render: function() {
+      //this.model.setName();
+      console.log(this.model.toJSON());
       $(this.el).html(this.template(this.model.toJSON()));
       return this;
     },
@@ -155,6 +161,7 @@ $(function() {
       this.todos.fetch();
       console.log(this.todos);
 
+
       state.on("change", this.filter, this);
     },
 
@@ -169,8 +176,8 @@ $(function() {
     // Re-rendering the App just means refreshing the statistics -- the rest
     // of the app doesn't change.
     render: function() {
-      var view = new SubmitView();
-      this.$('#todo-stats').html(view.render().el);
+      //var view = new SubmitView();
+      //this.$('#todo-stats').html(view.render().el);
       this.addAll();
       this.delegateEvents();
     },
@@ -178,6 +185,7 @@ $(function() {
     // Add a single todo item to the list by creating a view for it, and
     // appending its element to the `<ul>`.
     addOne: function(todo) {
+      console.log(todo);
       var view = new PostView({model: todo});
       this.$("#todo-list").append(view.render().el);
     },
@@ -195,7 +203,7 @@ $(function() {
       console.log(content);
       var newOne = new Post();
       newOne.save({
-        content: content,
+        description: content,
         rank:   -1,
         money_raised:0,
         num_stands:0,
@@ -208,39 +216,6 @@ $(function() {
       console.log(this.todos);
       this.input.val('');
       return false;
-    }
-  });
-
-  var SubmitView = Parse.View.extend({
-    events: {
-      "submit form.submit-form": "submite"
-    },
-    
-    initialize: function() {
-      _.bindAll(this, "submite");
-      this.render();
-    },
-
-    submite: function(e) {
-      var content = this.$("#content").val();
-      var title = this.$("#title").val();
-      var image = this.$("#image").val();
-      console.log(content);
-      var newOne = new Post();
-      newOne.save({
-        content: "content",
-        rank:   -1,
-        money_raised:0,
-        num_stands:0,
-        title: "Test",
-        created_by: Parse.User.current()
-      }, {success:function(newOne){
-        console.log("yay");
-      }});
-    },
-    render: function() {
-      this.$el.html(_.template($("#submit-template").html()));
-      return this;
     }
   });
 

@@ -1,103 +1,103 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Parse JavaScript Todo App</title>
-    <link href="css/todos.css" media="all" rel="stylesheet" type="text/css"/>
-    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script src="js/underscore-1.1.6.js"></script>
-    <script src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
-    <script src="js/todos.js"></script>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
-        <style type="text/css">
-            /* bootstrap 3 helpers */
+<head>
+  <meta charset="utf-8">
+  <title>Parse JavaScript Todo App</title>
+  <link href="css/todos.css" media="all" rel="stylesheet" type="text/css"/>
+  <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="js/underscore-1.1.6.js"></script>
+  <script src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
+  <script src="js/todos.js"></script>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
+  <style type="text/css">
+  /* bootstrap 3 helpers */
 
-.navbar-form input, .form-inline input {
-  width:auto;
-}
-
-/* end */
-
-/* custom theme */
-
-header {
-  min-height:230px;
-    margin-bottom:5px;
-}
-
-@media (min-width: 979px) {
-  #sidebar.affix-top {
-      position: static;
+  .navbar-form input, .form-inline input {
+    width:auto;
   }
-  
-  #sidebar.affix {
+
+  /* end */
+
+  /* custom theme */
+
+  header {
+    min-height:100px;
+    margin-bottom:5px;
+  }
+
+  @media (min-width: 979px) {
+    #sidebar.affix-top {
+      position: static;
+    }
+
+    #sidebar.affix {
       position: fixed;
       top: 0;
       width:21.2%;
+    }
   }
-}
 
-.affix,.affix-top {
+  .affix,.affix-top {
    position:static;
-}
+ }
 
-/* theme */
+ /* theme */
 
-body {
+ body {
   color:#828282;
   background-color:#eee;
 }
 
 a,a:hover {
   color:#ff3333;
-    text-decoration:none;
+  text-decoration:none;
 }
 
 .highlight-bk {
   background-color:#ff3333;
-    padding:1px;
-    width:100%;
+  padding:1px;
+  width:100%;
 }
 
 .highlight {
   color:#ff3333;
 }
-  
+
 h3.highlight  {
   padding-top:13px;
-    padding-bottom:14px;
-    border-bottom:2px solid #ff3333;
+  padding-bottom:14px;
+  border-bottom:2px solid #ff3333;
 }
 
 .navbar {
   background-color:#ff3333;
-    color:#ffffff;
-    border:0;
-    border-radius:0;
+  color:#ffffff;
+  border:0;
+  border-radius:0;
 }
 .navbar-nav > li > a {
-    color:#fff;
-    padding-left:20px;
-    padding-right:20px;
-    border-left:1px solid #e8e8e8;
+  color:#fff;
+  padding-left:20px;
+  padding-right:20px;
+  border-left:1px solid #e8e8e8;
 }
 .navbar-nav > li:last-child > a {
-    border-right:1px solid #e8e8e8;
+  border-right:1px solid #e8e8e8;
 }
 .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
-    color: #ffffff;
+  color: #ffffff;
   background-color:transparent;
 }
 .navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
   color: #555555;
   background-color:transparent;
-    opacity:.9;
+  opacity:.9;
 }
 
 .nav .open > a {
-    border-color:#777777;
-    border-width:0;
+  border-color:#777777;
+  border-width:0;
 }
 
 .accordion-group {
@@ -118,23 +118,23 @@ h3.highlight  {
 
 .navbar-toggle {
   color:#fff;
-    border-width:0;
+  border-width:0;
 }
-  
+
 .navbar-toggle:hover {
   background-color:#fff;
 }
 
 .panel {
   padding-left:27px;
-    padding-right:27px;
+  padding-right:27px;
 }
 
 /* end theme */
-        </style>
-  </head>
+</style>
+</head>
 
-  <body>
+<body>
 
     <!-- Todo App Interface -->
 
@@ -170,7 +170,7 @@ h3.highlight  {
         </form>
       </div>
     </script>
-        <script type="text/template" id="submit-template">
+    <script type="text/template" id="submit-template">
       <header id="header"></header>
       <div class="login">
         <form class="submit-form">
@@ -218,10 +218,13 @@ h3.highlight  {
       </div>    
     </div>
 </div><!-- /.navbar -->
-
-      <div class="section">
-
-        <header id="header">
+<div class="container">
+  <div class="row">
+  <div class="col col-sm-12">
+              <div class="panel">
+                <div class="row">
+  <div class="col col-sm-12">
+                  <header id="header">
            <form class="submit-form">
           <h2>Submit a new post</h2>
           <div class="error" style="display:none"></div>
@@ -232,7 +235,7 @@ h3.highlight  {
         </form>
            </div>
         </header>
-
+                  <h2>Stands</h2>
         <div id="main">
           <input id="toggle-all" type="checkbox">
           <label for="toggle-all">Mark all as complete</label>
@@ -241,13 +244,21 @@ h3.highlight  {
             <img src='images/spinner.gif' class='spinner' />
           </ul>
         </div>
-
+  </div>
+  </div>  </div>
+      
     </script>
 
     <script type="text/template" id="item-template">
       <li>
 	<div class="view">
-	  <label class="todo-content"><%= content %></label>
+  <div class="row">
+  <div class="col col-sm-2">
+    <img src="images/icon-user-default.png" height="42" width="42" vspace="10">
+    </div>
+    <div class="col col-sm-10">
+	  <label class="todo-content"><%= title%></label><%=description%>
+    </div>
 	</div>
  </li>
     </script>
