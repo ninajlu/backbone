@@ -209,15 +209,8 @@ $(function() {
       }, {success:function(newOne){
         console.log("yay");
       }});
-      this.todos.create({
-        content: this.input.val(),
-        rank:   -1,
-        money_raised:0,
-        num_stands:0,
-        name:    "Test",
-        created_by: Parse.User.current(),
-        ACL:     new Parse.ACL(Parse.User.current())
-      });
+      this.todos.add(newOne);
+      console.log(this.todos);
       this.input.val('');
       return false;
     }
