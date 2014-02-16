@@ -8,6 +8,130 @@
     <script src="js/underscore-1.1.6.js"></script>
     <script src="http://www.parsecdn.com/js/parse-1.2.13.min.js"></script>
     <script src="js/todos.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" type="text/css" rel="stylesheet">
+        <style type="text/css">
+            /* bootstrap 3 helpers */
+
+.navbar-form input, .form-inline input {
+  width:auto;
+}
+
+/* end */
+
+/* custom theme */
+
+header {
+  min-height:230px;
+    margin-bottom:5px;
+}
+
+@media (min-width: 979px) {
+  #sidebar.affix-top {
+      position: static;
+  }
+  
+  #sidebar.affix {
+      position: fixed;
+      top: 0;
+      width:21.2%;
+  }
+}
+
+.affix,.affix-top {
+   position:static;
+}
+
+/* theme */
+
+body {
+  color:#828282;
+  background-color:#eee;
+}
+
+a,a:hover {
+  color:#ff3333;
+    text-decoration:none;
+}
+
+.highlight-bk {
+  background-color:#ff3333;
+    padding:1px;
+    width:100%;
+}
+
+.highlight {
+  color:#ff3333;
+}
+  
+h3.highlight  {
+  padding-top:13px;
+    padding-bottom:14px;
+    border-bottom:2px solid #ff3333;
+}
+
+.navbar {
+  background-color:#ff3333;
+    color:#ffffff;
+    border:0;
+    border-radius:0;
+}
+.navbar-nav > li > a {
+    color:#fff;
+    padding-left:20px;
+    padding-right:20px;
+    border-left:1px solid #e8e8e8;
+}
+.navbar-nav > li:last-child > a {
+    border-right:1px solid #e8e8e8;
+}
+.navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: #ffffff;
+  background-color:transparent;
+}
+.navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
+  color: #555555;
+  background-color:transparent;
+    opacity:.9;
+}
+
+.nav .open > a {
+    border-color:#777777;
+    border-width:0;
+}
+
+.accordion-group {
+  border-width:0;
+}
+
+.dropdown-menu {
+  min-width: 250px;
+}
+
+.accordion-heading .accordion-toggle, .accordion-inner, .nav-stacked li > a {
+  padding-left:1px;
+}
+
+.caret {
+  color:#fff;
+}
+
+.navbar-toggle {
+  color:#fff;
+    border-width:0;
+}
+  
+.navbar-toggle:hover {
+  background-color:#fff;
+}
+
+.panel {
+  padding-left:27px;
+    padding-right:27px;
+}
+
+/* end theme */
+        </style>
   </head>
 
   <body>
@@ -15,10 +139,6 @@
     <!-- Todo App Interface -->
 
     <div id="todoapp">
-      <div class="title">
-        <h1>Parse Todos</h1>
-      </div>
-
       <div class="content">
       </div>
     </div>
@@ -65,9 +185,39 @@
     </script>
 
     <script type="text/template" id="manage-todos-template">
-      <div id="user-info">
-        Signed in as <%= Parse.User.current().get("username") %> (<a href="#" class="log-out">Log out</a>)
-      </div>
+<div class="navbar navbar-static">
+    <div class="container">
+      <a class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </a>
+      <div class="nav-collapse collase">
+        <ul class="nav navbar-nav">  
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Link</a></li>
+          <li><a href="#">Link</a></li>
+        </ul>
+        <ul class="nav pull-right navbar-nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i></a>
+            <ul class="dropdown-menu" style="padding:12px;">
+                <form class="form-inline">
+            <button type="submit" class="btn btn-default pull-right"><i class="glyphicon glyphicon-search"></i></button><input type="text" class="form-control pull-left" placeholder="Search">
+                </form>
+              </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <%= Parse.User.current().get("username") %><i class="glyphicon glyphicon-chevron-down"></i></a>
+            <ul class="dropdown-menu">
+              <li><a href="#" class="log-out">Log out</a></li>
+              <li><a href="#">Profile</a></li>
+              <li class="divider"></li>
+              <li><a href="#">About</a></li>
+             </ul>
+          </li>  
+        </ul>
+      </div>    
+    </div>
+</div><!-- /.navbar -->
 
       <div class="section">
 
