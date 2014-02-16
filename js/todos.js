@@ -121,12 +121,12 @@ $(function() {
   var ManagePostsView = Parse.View.extend({
 
     // Our template for the line of statistics at the bottom of the app.
-    submitTemplate: _.template($('#submit-template').html()),
+    //submitTemplate: _.template($('#submit-template').html()),
 
     // Delegated events for creating new items, and clearing completed ones.
     events: {
-      "keypress #new-todo":  "createOnEnter",
-      "click .log-out": "logOut"
+      "click .log-out": "logOut",
+      "click #submitbutton": "createOnEnter"
     },
 
     el: ".content",
@@ -195,14 +195,15 @@ $(function() {
     createOnEnter: function(e) {
       var content = this.$("#content").val();
       var title = this.$("#title").val();
+      var image = this.$("#image").val();
       console.log(content);
       var newOne = new Post();
       newOne.save({
-        content: this.input.val(),
+        content: content,
         rank:   -1,
         money_raised:0,
         num_stands:0,
-        title: "Test",
+        title: title,
         created_by: Parse.User.current(),
         ACL: new Parse.ACL(Parse.User.current())
       }, {success:function(newOne){
@@ -218,6 +219,7 @@ $(function() {
         ACL:     new Parse.ACL(Parse.User.current())
       });
       this.input.val('');
+      return false;
     }
   });
 
