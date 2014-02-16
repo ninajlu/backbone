@@ -50,6 +50,7 @@ $(function() {
       var got=username.get(looking).get("username");
       console.log(got);
       this.set({"author":"too"});
+      this.set({"imageURL":this.get("image").url});
      /* username.get("HdjMMi3DvJ",{
   success: function(object) {
         console.log("hello");
@@ -150,6 +151,7 @@ $(function() {
 
     // Re-render the contents of the todo item.
     render: function() {
+      //this.model.getName();
       $(this.el).html(this.template(this.model.toJSON()));
       return this;
     },
