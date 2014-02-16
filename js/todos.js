@@ -13,6 +13,15 @@ $(function() {
   // ----------
 
   // Our basic Post model has `content`, `order`, and `done` attributes.
+  var User = Parse.Object.extend("User");
+    var UserList = Parse.Collection.extend({
+
+    // Reference to this collection's model.
+    model: User});
+  var username = new UserList();
+  username.query=Parse.Query(User);
+  username.fetch();
+  console.log(username);
   var Post = Parse.Object.extend("Post", {
     // Default attributes for the todo.
     defaults: {
@@ -20,7 +29,8 @@ $(function() {
       rank:   -1,
         money_raised:0,
         num_stands:0,
-        title: "Test"
+        title: "Test",
+        author:"author"
     },
 
     // Ensure that each todo created has `content`.
@@ -28,11 +38,45 @@ $(function() {
       if (!this.get("description")) {
         this.set({"description": this.defaults.description});
       }
+      if (!this.get("author")) {
+        this.set({"author": this.defaults.author});
+      }
       console.log(this.get("description"));
     },
-    setName: function(){
-      console.log(this);
-      //this.set({"author":this.get("created_by").get("username")});
+    getName: function(){
+      var self=this;
+      var looking=this.get("created_by").id;
+      console.log(looking);
+      var got=username.get(looking).get("username");
+      console.log(got);
+      this.set({"author":"too"});
+     /* username.get("HdjMMi3DvJ",{
+  success: function(object) {
+        console.log("hello");
+    console.log(object.get("username"));
+    self.set({"author":"too"});
+  },
+  error: function(object, error) {
+    self.set({"author":"none"});// error is an instance of Parse.Error.
+  }});*/
+     // self.set({"author":got.get("username")});
+       /* username.get(looking,{
+  success: function(object) {
+    var got=object.get("username");
+    self.set({"author":got});
+  },
+
+  error: function(object, error) {
+    this.set({"author":"none"});// error is an instance of Parse.Error.
+  }});*/
+      /*username.get(this.get("created_by").id, {
+  success: function(object) {
+    self.set({"author":object.get("username")});
+  },
+
+  error: function(object, error) {
+    this.set({"author":"none"});// error is an instance of Parse.Error.
+  }});*/
     },
     // Toggle the `done` state of this todo item.
     toggle: function() {
@@ -101,12 +145,11 @@ $(function() {
     initialize: function() {
       _.bindAll(this, 'render');
       this.model.bind('change', this.render);
+      //this.model.getName();
     },
 
     // Re-render the contents of the todo item.
     render: function() {
-      //this.model.setName();
-      console.log(this.model.toJSON());
       $(this.el).html(this.template(this.model.toJSON()));
       return this;
     },
@@ -185,7 +228,7 @@ $(function() {
     // Add a single todo item to the list by creating a view for it, and
     // appending its element to the `<ul>`.
     addOne: function(todo) {
-      console.log(todo);
+      //console.log(todo);
       var view = new PostView({model: todo});
       this.$("#todo-list").append(view.render().el);
     },
